@@ -32,14 +32,18 @@ const settings = {
 };
 
 const paginateArray = (dataEntries, settings) => {
-  const { startItem, endItem } = settings;
+  const { startItem, endItem, actualPageIdx, entriesOnPage } = settings;
+  console.log(typeof actualPageIdx === "number");
 
-  const entriesOnSelectedPage = dataEntries.slice(
-    settings.startItem(),
-    settings.endItem()
-  );
-
-  return entriesOnSelectedPage;
+  if (typeof actualPageIdx === "number" && typeof entriesOnPage === "number") {
+    const entriesOnSelectedPage = dataEntries.slice(
+      settings.startItem(),
+      settings.endItem()
+    );
+    return entriesOnSelectedPage;
+  } else {
+    return console.log("argumenty w obiekcie settings nie sa liczbami ");
+  }
 };
 paginateArray(data, settings);
 
