@@ -20,15 +20,35 @@ const settings = {
   actualPageIdx: 7,
   entriesOnPage: 50,
   allElements: data.length,
+  pageIdx: function () {
+    return this.actualPageIdx - 1;
+  },
+  startItem: function () {
+    return this.entriesOnPage * this.pageIdx();
+  },
+  endItem: function () {
+    return this.startItem() + this.entriesOnPage;
+  },
 };
 
 const paginateArray = (dataEntries, settings) => {
-  let {actualPageIdx, entriesOnPage} = settings;
-  actualPageIdx--;
+  const { startItem, endItem } = settings;
 
-  let startItem = entriesOnPage * actualPageIdx;
-  let endItem = startItem + entriesOnPage;
-  const entriesOnSelectedPage = dataEntries.slice(startItem, endItem);
+  const entriesOnSelectedPage = dataEntries.slice(
+    settings.startItem(),
+    settings.endItem()
+  );
+
   return entriesOnSelectedPage;
 };
 paginateArray(data, settings);
+
+const validateFunction = (input) => {
+  if (Array.isArray(input)) {
+    console.log("mamy tablice");
+  } else {
+    console.log("nie dziala");
+  }
+};
+
+validateFunction(paginateArray(data, settings));
