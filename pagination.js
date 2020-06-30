@@ -34,6 +34,17 @@ const settings = {
 const paginateArray = (dataEntries, settings) => {
   const { actualPageIdx, entriesOnPage } = settings;
 
+  //ver 2
+  // typeof settings.pageIdx()
+  //   ? () => {
+  //       const entriesOnSelectedPage = dataEntries.slice(
+  //         settings.startItem(),
+  //         settings.endItem()
+  //       );
+  //       return entriesOnSelectedPage;
+  //     }
+  //   : () => console.log("brak tablicy");
+
   if (
     typeof actualPageIdx === "number" &&
     typeof entriesOnPage === "number" &&
