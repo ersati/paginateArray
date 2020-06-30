@@ -32,27 +32,50 @@ const settings = {
 };
 
 const paginateArray = (dataEntries, settings) => {
-  const { startItem, endItem, actualPageIdx, entriesOnPage } = settings;
-  console.log(typeof actualPageIdx === "number");
+  const { actualPageIdx, entriesOnPage } = settings;
 
-  if (typeof actualPageIdx === "number" && typeof entriesOnPage === "number") {
+  if (
+    typeof actualPageIdx === "number" &&
+    typeof entriesOnPage === "number" &&
+    typeof settings.pageIdx() === "number" &&
+    typeof settings.startItem() === "number" &&
+    typeof settings.endItem() === "number"
+  ) {
     const entriesOnSelectedPage = dataEntries.slice(
       settings.startItem(),
       settings.endItem()
     );
-    return entriesOnSelectedPage;
+    if (Array.isArray(entriesOnSelectedPage)) {
+      console.log(`gratulacje, to jest tablica ${entriesOnSelectedPage}`);
+      return entriesOnSelectedPage;
+    } else {
+      return console.log("to nie jest tablica");
+    }
   } else {
     return console.log("argumenty w obiekcie settings nie sa liczbami ");
   }
 };
 paginateArray(data, settings);
 
-const validateFunction = (input) => {
+const validateFunction = (input, { actualPageIdx, entriesOnPage }) => {
   if (Array.isArray(input)) {
-    console.log("mamy tablice");
+    console.log("gratulacje to jest tablica ");
   } else {
-    console.log("nie dziala");
+    console.log("to nie jest tablica");
+  }
+  console.log(typeof settings.pageIdx());
+
+  if (
+    typeof actualPageIdx === "number" &&
+    typeof entriesOnPage === "number" &&
+    typeof settings.pageIdx() === "number" &&
+    typeof settings.startItem() === "number" &&
+    typeof settings.endItem() === "number"
+  ) {
+    console.log("gratulacje, parametry mają number");
+  } else {
+    console.log("paramentr nie ma poprawnych danych  ");
   }
 };
 
-validateFunction(paginateArray(data, settings));
+validateFunction(paginateArray(data, settings), settings);
