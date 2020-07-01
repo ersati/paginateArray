@@ -34,18 +34,13 @@ const settings = {
 const paginateArray = (dataEntries, settings) => {
   const { actualPageIdx, entriesOnPage } = settings;
 
-  //ver 2
-  // typeof settings.pageIdx()
-  //   ? () => {
-  //       const entriesOnSelectedPage = dataEntries.slice(
-  //         settings.startItem(),
-  //         settings.endItem()
-  //       );
-  //       return entriesOnSelectedPage;
-  //     }
-  //   : () => console.log("brak tablicy");
-
+  //validacja ver1
   if (
+    actualPageIdx !== "" &&
+    entriesOnPage !== "" &&
+    settings.pageIdx() !== "" &&
+    settings.startItem() !== "" &&
+    settings.endItem() !== "" &&
     typeof actualPageIdx === "number" &&
     typeof entriesOnPage === "number" &&
     typeof settings.pageIdx() === "number" &&
@@ -68,6 +63,7 @@ const paginateArray = (dataEntries, settings) => {
 };
 paginateArray(data, settings);
 
+//validacja ver2
 const validateFunction = (input, { actualPageIdx, entriesOnPage }) => {
   if (Array.isArray(input)) {
     console.log("gratulacje to jest tablica ");
@@ -77,6 +73,11 @@ const validateFunction = (input, { actualPageIdx, entriesOnPage }) => {
   console.log(typeof settings.pageIdx());
 
   if (
+    actualPageIdx !== "" &&
+    entriesOnPage !== "" &&
+    settings.pageIdx() !== "" &&
+    settings.startItem() !== "" &&
+    settings.endItem() !== "" &&
     typeof actualPageIdx === "number" &&
     typeof entriesOnPage === "number" &&
     typeof settings.pageIdx() === "number" &&
