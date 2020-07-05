@@ -1,15 +1,3 @@
-// Stwórz funkcję paginateArray
-// const paginateArray = (dataEntries, settings) => {
-// ...
-// return entriesOnSelectedPage
-// }
-
-// która przyjmuję array do paginacji dataEntries oraz settings o kluczach { actualPageIdx=9, entriesOnPage=50 }
-// - actualPageIdx to index wybranej strony
-// - entriesOnPage to maksymalna zwracana ilość elementów z dataEntries dla wybranej strony
-
-// który zwraca entriesOnSelectedPage:
-// - entriesOnSelectedPage to array z odpowiednią ilością elementów z danej strony
 const data = [];
 
 for (i = 0; i < 500; i++) {
@@ -23,12 +11,25 @@ const settings = {
 };
 
 const paginateArray = (dataEntries, settings) => {
-  let {actualPageIdx, entriesOnPage} = settings;
-  actualPageIdx--;
-
-  let startItem = entriesOnPage * actualPageIdx;
-  let endItem = startItem + entriesOnPage;
-  const entriesOnSelectedPage = dataEntries.slice(startItem, endItem);
-  return entriesOnSelectedPage;
+  //validation
+  if (paginateArray.length !== 2) {
+    console.log("no enought arguments");
+  } else if (!Array.isArray(dataEntries)) {
+    console.log("this is no Array!");
+  } else if (typeof settings !== "object" && typeof settings !== "function") {
+    console.log("no object");
+  } else if (!settings.hasOwnProperty("actualPageIdx")) {
+    console.log("no values in actualPageIdx");
+  } else if (!settings.hasOwnProperty("entriesOnPage")) {
+    console.log("no values in entriesOnPage");
+  } else {
+    const {actualPageIdx, entriesOnPage} = settings;
+    const start = (actualPageIdx - 1) * entriesOnPage;
+    const end = start + entriesOnPage;
+    //array is slices here
+    const entriesOnSelectedPage = dataEntries.slice(start, end);
+    return entriesOnSelectedPage;
+  }
+  return [];
 };
-paginateArray(data, settings);
+console.log(paginateArray(data, settings));
