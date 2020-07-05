@@ -5,7 +5,7 @@ for (i = 0; i < 500; i++) {
 }
 
 const settings = {
-  actualPageIdx: 7,
+  actualPageIdx: 9,
   entriesOnPage: 50,
   allElements: data.length,
 };
@@ -18,9 +18,15 @@ const paginateArray = (dataEntries, settings) => {
     console.log("this is no Array!");
   } else if (typeof settings !== "object" && typeof settings !== "function") {
     console.log("no object");
-  } else if (!settings.hasOwnProperty("actualPageIdx")) {
+  } else if (
+    !settings.hasOwnProperty("actualPageIdx") ||
+    typeof settings.actualPageIdx !== "number"
+  ) {
     console.log("no values in actualPageIdx");
-  } else if (!settings.hasOwnProperty("entriesOnPage")) {
+  } else if (
+    !settings.hasOwnProperty("entriesOnPage") ||
+    typeof settings.entriesOnPage !== "number"
+  ) {
     console.log("no values in entriesOnPage");
   } else {
     const {actualPageIdx, entriesOnPage} = settings;
