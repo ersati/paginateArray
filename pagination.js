@@ -29,7 +29,7 @@ const paginateArray = (dataEntries, settings) => {
   ) {
     console.log("no values in entriesOnPage");
   } else {
-    const {actualPageIdx, entriesOnPage} = settings;
+    const { actualPageIdx, entriesOnPage } = settings;
     const start = (actualPageIdx - 1) * entriesOnPage;
     const end = start + entriesOnPage;
     //array is slices here
@@ -39,3 +39,15 @@ const paginateArray = (dataEntries, settings) => {
   return [];
 };
 console.log(paginateArray(data, settings));
+function isObject(val) {
+  return val instanceof Object;
+}
+
+function validation(array, object) {
+  let isTrue = true;
+  object instanceof Object ? (isTrue = true) : (isTrue = false);
+  Array.isArray(array) ? (isTrue = true) : (isTrue = false);
+
+  return isTrue;
+}
+console.log(validation({ data }, settings));
