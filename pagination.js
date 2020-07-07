@@ -12,28 +12,18 @@ const settings = {
 
 function validation(array, object) {
   let obj, arr, pageIdx, entriesOnPage, pageIdxValue, entriesOnPageValue;
-  let isTrue = true;
+
   Array.isArray(array) ? (arr = true) : (arr = false);
   object instanceof Object ? (obj = true) : (obj = false);
-  settings.hasOwnProperty("actualPageIdx")
-    ? (pageIdx = true)
-    : (pageIdx = false);
 
-  settings.hasOwnProperty("entriesOnPage")
-    ? (entriesOnPage = true)
-    : (entriesOnPage = false);
+  pageIdx = settings.hasOwnProperty("actualPageIdx");
+  entriesOnPage = settings.hasOwnProperty("entriesOnPage");
+  pageIdxValue = typeof settings.entriesOnPage === "number";
+  entriesOnPageValue = typeof settings.actualPageIdx === "number";
 
-  typeof settings.entriesOnPage === "number"
-    ? (pageIdxValue = true)
-    : (pageIdxValue = false);
-  typeof settings.actualPageIdx === "number"
-    ? (entriesOnPageValue = true)
-    : (entriesOnPageValue = false);
-  obj && arr && pageIdx && entriesOnPage && pageIdxValue && entriesOnPageValue
-    ? (isTrue = true)
-    : (isTrue = false);
-
-  return isTrue;
+  return (
+    obj && arr && pageIdx && entriesOnPage && pageIdxValue && entriesOnPageValue
+  );
 }
 
 const paginateArray = (dataEntries, settings) => {
