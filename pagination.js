@@ -5,49 +5,50 @@ for (i = 0; i < 500; i++) {
 }
 
 const settings = {
-  actualPageIdx: 9,
+  actualPageIdx: 7,
   entriesOnPage: 50,
   allElements: data.length,
 };
 
+function validation(array, object) {
+  let obj, arr, pageIdx, entriesOnPage, pageIdxValue, entriesOnPageValue;
+  let isTrue = true;
+  Array.isArray(array) ? (arr = true) : (arr = false);
+  object instanceof Object ? (obj = true) : (obj = false);
+  settings.hasOwnProperty("actualPageIdx")
+    ? (pageIdx = true)
+    : (pageIdx = false);
+
+  settings.hasOwnProperty("entriesOnPage")
+    ? (entriesOnPage = true)
+    : (entriesOnPage = false);
+
+  typeof settings.entriesOnPage === "number"
+    ? (pageIdxValue = true)
+    : (pageIdxValue = false);
+  typeof settings.actualPageIdx === "number"
+    ? (entriesOnPageValue = true)
+    : (entriesOnPageValue = false);
+  obj && arr && pageIdx && entriesOnPage && pageIdxValue && entriesOnPageValue
+    ? (isTrue = true)
+    : (isTrue = false);
+
+  return isTrue;
+}
+
 const paginateArray = (dataEntries, settings) => {
   //validation
-  if (paginateArray.length !== 2) {
-    console.log("no enought arguments");
-  } else if (!Array.isArray(dataEntries)) {
-    console.log("this is no Array!");
-  } else if (typeof settings !== "object" && typeof settings !== "function") {
-    console.log("no object");
-  } else if (
-    !settings.hasOwnProperty("actualPageIdx") ||
-    typeof settings.actualPageIdx !== "number"
-  ) {
-    console.log("no values in actualPageIdx");
-  } else if (
-    !settings.hasOwnProperty("entriesOnPage") ||
-    typeof settings.entriesOnPage !== "number"
-  ) {
-    console.log("no values in entriesOnPage");
-  } else {
+  if (paginateArray.length === 2 && validation(dataEntries, settings)) {
     const { actualPageIdx, entriesOnPage } = settings;
     const start = (actualPageIdx - 1) * entriesOnPage;
     const end = start + entriesOnPage;
     //array is slices here
     const entriesOnSelectedPage = dataEntries.slice(start, end);
     return entriesOnSelectedPage;
+  } else {
+    console.log("wrong arguments or value");
   }
   return [];
 };
+
 console.log(paginateArray(data, settings));
-function isObject(val) {
-  return val instanceof Object;
-}
-
-function validation(array, object) {
-  let isTrue = true;
-  object instanceof Object ? (isTrue = true) : (isTrue = false);
-  Array.isArray(array) ? (isTrue = true) : (isTrue = false);
-
-  return isTrue;
-}
-console.log(validation({ data }, settings));
